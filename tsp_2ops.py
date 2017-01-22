@@ -5,7 +5,9 @@ import math
 import time
 import sys
 
+
 def length(v1, v2):
+	'''Measure length or cost'''
 	#t = (x1 - x2) * 100
 	#return t
 	#print(str(v1) + " , " + str(v2))
@@ -16,6 +18,7 @@ def length(v1, v2):
 
 
 def route_swap(s, a, b):
+	'''Generate new route s is old route, a and b are indexes'''
 	new_route = s[0:a+1]
 	mid = s[a+1:b+1]
 	new_route = new_route + mid[::-1]
@@ -63,6 +66,7 @@ def two_opt(bestroute):
 	return bestroute
 
 if __name__ == '__main__':
+	'''point_tables is example case'''
 	point_table = [(0,0),(1,2),(10,0),(4,5),(2,0)]
 	point_size = len(point_table)
 	print("initial :" + str(point_table))
