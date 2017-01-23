@@ -38,7 +38,7 @@ def calc_route_length(route):
 def two_opt(bestroute):
 	'''Peforms 2-opt search to improve route'''
 	l = len(bestroute)
-	#len_best_route = calc_route_length(bestroute)
+	bestroute_cost = calc_route_length(bestroute)
 
 	while(True):
 		flag = True
@@ -48,16 +48,12 @@ def two_opt(bestroute):
 				j_next = (j + 1)%l
 				if i == 0 and j_next == 0:
 					continue
-				Li_i_next = length(bestroute[i], bestroute[i_next])
-				Lj_j_next = length(bestroute[j], bestroute[j_next])
-				Li_j = length(bestroute[i], bestroute[j])
-				Li_next_j_next = length(bestroute[i_next], bestroute[j_next])
-				L_now = Li_i_next + Lj_j_next
-				L_new = Li_j + Li_next_j_next
-				if L_now > L_new:
+				swapped_route = route_swap(bestroute, i, j)
+				swapped_route_cost = calc_route_length(swapped_route)
+				if swapped_route_cost < bestroute_cost:
 					print(str(i) + "," + str(j) + "," + str(bestroute))
-					bestroute = route_swap(bestroute, i, j)
-					#len_best_route = len_best_route - L_new + L_new
+					bestroute_cost = swapped_route_cost
+					bestroute = swapped_route
 					flag = False
 
 		if flag:
